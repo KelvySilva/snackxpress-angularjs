@@ -1,0 +1,62 @@
+<html lang="en" ng-app="snackxpress">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./angular.js"></script>
+    <link rel="stylesheet" href="./bootstrap-4.5.0-dist/css/bootstrap.css">
+    <script>
+        angular.module("snackxpress", []);
+        angular.module("snackxpress").controller("snackxpressController", ($scope, $http) => {
+            $scope.app = "Snackxpress";            
+            $scope.user = {} //in the beginning of the controller.
+            var updateScopeIngredients = function( ingredientsData ) {  
+                $scope.ingredients = ingredientsData; 
+            };
+            
+            $scope.getIngredients = function (updateScopeIngredientsDelegate) {
+                var response = $http({
+                    method: "GET",
+                    url: ("http://127.0.0.1:8082/v1/protected/ingredients"),
+                    responseType: "json"
+                }).then(
+                    function (response) { //success
+                        updateScopeIngredientsDelegate(response.data);
+                    },
+                    function (response) { //error
+                        alert(response.data.message);
+                        return undefined;
+                    }
+                );
+            };
+            $scope.getIngredients(updateScopeIngredients);
+            
+        });
+    </script>
+</head>
+<body ng-controller="snackxpressController" class="">
+      <main class="jumbotron">
+        <div class="container ">
+            <div class="row pb-5">
+                <div class="col-lg-12 text-center">
+                 <h1 class="h2" ng-bind="app">
+                 </h1>
+         
+                </div>
+            </div>           
+        </div>
+        <div class="container ">
+             <div class="row justify-content-center">
+                 <div class="col-lg-8">
+                 <ul class="border">
+                     <li  ng-repeat="(key, value) in ingredients" class="list-unstyled border-bottom px-3 py-2">
+                         {{key}} - {{value.name}}
+                     </li>
+                 </ul>
+                 </div>
+             </div>
+        </div>
+      </main>
+       
+</body>
+</html>
