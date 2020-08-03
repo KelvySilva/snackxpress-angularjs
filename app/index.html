@@ -1,0 +1,31 @@
+<html lang="pt" ng-app="snackxpress">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snackxpress</title>
+    <script src="./lib/angular/angular.js"></script>
+    <script src="./lib/angular/angular-route.js"></script>
+    <script src="./lib/angular/angular.locale.pt_br.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/app.route.js"></script>
+    <script src="./js/config/baseurl.js"></script>
+
+    <script src="./js/filters/capitalize.js"></script>
+    <script src="./js/filters/limiter.js"></script>
+
+    <script src="./js/directives/errorMessage.js"></script>
+    
+    <script src="./js/controllers/ingredientsCtrl.js"></script> 
+    <script src="./js/controllers/productsCtrl.js"></script> 
+
+    <script src="./js/services/ingredientSvc.js"></script> 
+    <script src="./js/services/productSvc.js"></script> 
+
+    <link rel="stylesheet" href="../app/lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../app/css/app.css">
+   
+</head>
+<body class="">
+    <div ng-view></div>     
+</body>
+</html>

@@ -1,0 +1,21 @@
+table tr td,table tr th {
+    font-size: .85rem;
+}
+
+.ui-alert {
+    background-color: #f2dede;
+    padding: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+}
+.ui-alert-title {
+    color: #af4341;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.ui-alert-message {
+    color: #af4341;
+    font-size: 1.25rem;
+}

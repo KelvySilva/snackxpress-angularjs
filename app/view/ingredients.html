@@ -1,0 +1,42 @@
+<main class="jumbotron" ng-controller="ingredientCtrl" >
+    <div class="container ">
+        <div class="row pb-5">
+            <div class="col-lg-12 text-center">
+             <h1 class="h2" ng-bind="app">
+             </h1>
+     
+            </div>
+        </div>           
+    </div>
+        
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+               <error-message ng-show="error"></error-message>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Custo</th>
+                            <th>Estoque</th>
+                            <th>Custo total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ingredient in ingredients">
+                            <td> {{ingredient.id}} </td>
+                            <td> {{ingredient.name | capitalize | limiter:15}} </td>
+                            <td> {{ingredient.description }} </td>
+                            <td> {{ingredient.cost | currency}} </td>
+                            <td> {{ingredient.stock.quantity}} </td>
+                            <td> {{(ingredient.stock.quantity * ingredient.stock.quantity) | currency}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+       </div>
+    <!-- </div> -->
+  </main>
