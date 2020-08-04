@@ -1,7 +1,10 @@
 angular.module('snackxpress').config(($routeProvider) => {
-
+    
     $routeProvider
-    .when('/ingredients', {
+    .when('/', {
+        templateUrl:'view/home.html',
+        controller:'homeCtrl'        
+    }).when('/ingredients', {
         templateUrl:'view/ingredients.html',
         controller:'ingredientCtrl'
     }).when('/products', {
@@ -21,7 +24,7 @@ angular.module('snackxpress').config(($routeProvider) => {
         
     }).when('/', {
         
-    }).otherwise('app/index.html',{
+    }).otherwise('/not_found',{
         templateUrl: 'notfound_404.html'
     });
 })
