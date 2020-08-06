@@ -1,4 +1,4 @@
-<main class="jumbotron" ng-controller="productCtrl">
+<main class="jumbotron" ng-controller="recipeCtrl">
     <div class="container "  >
         <div class="row pb-5">
             <div class="col-lg-12 text-center">
@@ -20,22 +20,20 @@
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Custo</th>
-                            <th>Estoque</th>
-                            <th>Custo total</th>
+                            <th>Qtd Ingredients</th>
                             <th>Preço</th>
                             <th>Desconto</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="product in products">
-                            <td> {{product.id}} </td>
-                            <td> {{product.name | capitalize | limiter:15}} </td>
-                            <td> {{product.description }} </td>
-                            <td> {{product.cost | currency}} </td>
-                            <td> {{product.stock.quantity}} </td>
-                            <td> {{(product.stock.quantity * product.stock.quantity) | currency}} </td>
-                            <td> {{product.price | currency}} </td>
-                            <td> {{product.discount | currency}} </td>
+                        <tr ng-repeat="recipe in recipes">
+                            <td> {{recipe.id}} </td>
+                            <td> {{recipe.name | capitalize | limiter:15}} </td>
+                            <td> {{recipe.productFinal.description }} </td>
+                            <td> {{recipe.productFinal.cost | currency}} </td>
+                            <td> {{recipe.composities.length}} </td>
+                            <td> {{recipe.productFinal.price | currency}} </td>
+                            <td> {{recipe.productFinal.discount | currency}} </td>
                         </tr>
                     </tbody>
                 </table>

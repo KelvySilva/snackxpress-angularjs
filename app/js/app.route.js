@@ -10,20 +10,9 @@ angular.module('snackxpress').config(($routeProvider) => {
     }).when('/products', {
         templateUrl:'view/products.html',
         controller:'productCtrl'
-    }).when('/', {
-        
-    }).when('/', {
-        
-    }).when('/', {
-        
-    }).when('/', {
-        
-    }).when('/', {
-        
-    }).when('/', {
-        
-    }).when('/', {
-        
+    }).when('/recipes', {
+        templateUrl:'view/recipes.html',
+        controller:'recipeCtrl'
     }).otherwise('/not_found',{
         templateUrl: 'notfound_404.html'
     });
