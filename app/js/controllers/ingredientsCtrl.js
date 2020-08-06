@@ -11,7 +11,10 @@ angular.module('snackxpress').controller("ingredientCtrl",  function($scope, ing
         });
     }
 
+
     $scope.ingredients = listIngredients();
-   
+    
+    
+    
     
 });

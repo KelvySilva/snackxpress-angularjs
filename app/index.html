@@ -3,30 +3,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snackxpress</title>
+    <!-- CORE & MODULES -->
+    
     <script src="./lib/angular/angular.js"></script>
     <script src="./lib/angular/angular-route.js"></script>
     <script src="./lib/angular/angular.locale.pt_br.js"></script>
     <script src="./js/app.js"></script>
     <script src="./js/app.route.js"></script>
     <script src="./js/config/baseurl.js"></script>
-
+    <script defer src="./lib/fa/js/all.min.js"></script>
+    <!-- FILTERS -->
     <script src="./js/filters/capitalize.js"></script>
     <script src="./js/filters/limiter.js"></script>
-
+    <!-- DIRECTIVES -->
     <script src="./js/directives/errorMessage.js"></script>
-    
+    <!-- CONTROLLERS -->
+    <script src="./js/controllers/homeCtrl.js"></script> 
     <script src="./js/controllers/ingredientsCtrl.js"></script> 
     <script src="./js/controllers/productsCtrl.js"></script>
     <script src="./js/controllers/recipeCtrl.js"></script> 
-    <script src="./js/controllers/homeCtrl.js"></script> 
-
+    <script src="./js/controllers/menuCtrl.js"></script> 
+    <script src="./js/controllers/clientCtrl.js"></script> 
+    <!-- SERVICES -->
     <script src="./js/services/ingredientSvc.js"></script> 
     <script src="./js/services/productSvc.js"></script> 
     <script src="./js/services/recipeSvc.js"></script> 
-
-    <link rel="stylesheet" href="../app/lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="../app/css/app.css">
-    <link rel="stylesheet" href="../app/css/simple_sidebar.css">
+    <script src="./js/services/menuSvc.js"></script> 
+    <script src="./js/services/clientSvc.js"></script> 
+    <!-- LIBS -->
+    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/simple_sidebar.css">   
    
 </head>
 <body>
@@ -37,9 +44,11 @@
       <div class="bg-light border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">Start Bootstrap </div>
         <div class="list-group list-group-flush">
-          <a href="#!/products" class="list-group-item list-group-item-action bg-light">Produtos</a>
-          <a href="#!/ingredients" class="list-group-item list-group-item-action bg-light">Ingredients</a>
-          <a href="#!/recipes" class="list-group-item list-group-item-action bg-light">Recipes</a>
+          <a ng-href="#!/products" class="list-group-item list-group-item-action bg-light">Produtos</a>
+          <a ng-href="#!/ingredients" class="list-group-item list-group-item-action bg-light">Ingredientes</a>
+          <a ng-href="#!/recipes" class="list-group-item list-group-item-action bg-light">Recipes</a>
+          <a ng-href="#!/menus" class="list-group-item list-group-item-action bg-light">Cardápios</a>
+          <a ng-href="#!/clients" class="list-group-item list-group-item-action bg-light">Clientes</a>
           <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
           <a href="#" class="list-group-item list-group-item-action bg-light">Status</a> -->
@@ -88,8 +97,8 @@
     <!-- /#wrapper -->
   
     <!-- Bootstrap core JavaScript -->
-    <script src="../app/lib/jquery/jquery-3.5.1.js"></script>
-    <script src="../app/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="../../app/lib/jquery/jquery-3.5.1.js"></script>
+    <script src="../../app/lib/bootstrap/js/bootstrap.js"></script>
     <!-- <script src="../app/lib/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script>
 
