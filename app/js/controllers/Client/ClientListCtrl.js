@@ -1,4 +1,4 @@
-angular.module('snackxpress').controller("clientCtrl",  function($scope, clientAPI)  {
+angular.module('snackxpress').controller("ClientListCtrl",  function($scope, clientAPI)  {
     $scope.app = "Snackxpress";   
     $scope.clients = []; 
     $scope.error =  '';
@@ -6,8 +6,8 @@ angular.module('snackxpress').controller("clientCtrl",  function($scope, clientA
     var listClients = () => {
         clientAPI.listAll().then(res => {
             $scope.clients = res.data;
-        }).catch(err => {
-            $scope.error = "Houve um problema: "+err;
+        }).catch(err => {            
+            $scope.error = err.data.detail;
         });
     }
 

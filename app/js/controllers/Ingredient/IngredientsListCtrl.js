@@ -1,4 +1,4 @@
-angular.module('snackxpress').controller("ingredientCtrl",  function($scope, ingredientAPI)  {
+angular.module('snackxpress').controller("IngredientListCtrl",  function($scope, ingredientAPI)  {
     $scope.app = "Snackxpress";   
     $scope.ingredients = []; 
     $scope.error =  '';
@@ -7,7 +7,7 @@ angular.module('snackxpress').controller("ingredientCtrl",  function($scope, ing
         ingredientAPI.listAll().then(res => {
             $scope.ingredients = res.data;
         }).catch(err => {
-            $scope.error = "Houve um problema: "+err;
+            $scope.error = err.data.detail;
         });
     }
 

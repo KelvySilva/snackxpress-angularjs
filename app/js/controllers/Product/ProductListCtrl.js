@@ -1,4 +1,4 @@
-angular.module('snackxpress').controller("productCtrl",  function($scope, productAPI)  {
+angular.module('snackxpress').controller("ProductListCtrl",  function($scope, productAPI)  {
     $scope.app = "Snackxpress";   
     $scope.products = []; 
     $scope.error =  '';
