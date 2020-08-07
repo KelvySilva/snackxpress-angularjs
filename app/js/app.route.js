@@ -22,6 +22,9 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/menus', {
         templateUrl:'view/menus/menus.html'
     })
+    .when('/menu/:menu_id', {
+        templateUrl:'view/menus/menuDetails.html'
+    })
     .when('/clients', {
         templateUrl:'view/clients/clients.html'
     })

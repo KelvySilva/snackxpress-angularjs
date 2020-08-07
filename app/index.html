@@ -24,6 +24,7 @@
     <script src="./js/controllers/Recipe/RecipeListCtrl.js"></script> 
     <script src="./js/controllers/Recipe/RecipeDetailsCtrl.js"></script> 
     <script src="./js/controllers/Menu/MenuListCtrl.js"></script> 
+    <script src="./js/controllers/Menu/MenuDetailsCtrl.js"></script> 
     <script src="./js/controllers/Client/ClientListCtrl.js"></script> 
     <!-- SERVICES -->
     <script src="./js/services/ingredientSvc.js"></script> 
@@ -43,11 +44,11 @@
   
       <!-- Sidebar -->
       <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Start Bootstrap </div>
+        <div class="sidebar-heading">Snackspress </div>
         <div class="list-group list-group-flush">
           <a ng-href="#!/products" class="list-group-item list-group-item-action bg-light">Produtos</a>
           <a ng-href="#!/ingredients" class="list-group-item list-group-item-action bg-light">Ingredientes</a>
-          <a ng-href="#!/recipes" class="list-group-item list-group-item-action bg-light">Recipes</a>
+          <a ng-href="#!/recipes" class="list-group-item list-group-item-action bg-light">Receitas</a>
           <a ng-href="#!/menus" class="list-group-item list-group-item-action bg-light">Cardápios</a>
           <a ng-href="#!/clients" class="list-group-item list-group-item-action bg-light">Clientes</a>
           <!-- <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
@@ -61,14 +62,14 @@
       <div id="page-content-wrapper">
   
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-          <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+          <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
   
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
   
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0 d-none">
               <li class="nav-item active">
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>

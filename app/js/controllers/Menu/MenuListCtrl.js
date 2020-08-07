@@ -1,9 +1,9 @@
-angular.module('snackxpress').controller("MenuListCtrl",  function($scope, menuAPI)  {
-    $scope.app = "Snackxpress";   
+angular.module('snackxpress').controller("MenuListCtrl",  function($scope,$location ,menuAPI)  {
     $scope.menus = []; 
     $scope.error =  '';
     
     var listMenus = () => {
+        $scope.app = "Cardápios";   
         menuAPI.listAll().then(res => {
             $scope.menus = res.data;
         }).catch(err => {
@@ -13,5 +13,8 @@ angular.module('snackxpress').controller("MenuListCtrl",  function($scope, menuA
 
     $scope.menus = listMenus();
    
+    $scope.menuDetail = function(id) {
+        $location.path(`/menu/${id}`)
+    }
     
 });

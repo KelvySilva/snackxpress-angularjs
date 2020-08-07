@@ -8,6 +8,10 @@ angular.module('snackxpress').controller("RecipeDetailsCtrl",  function($scope, 
     var recipeDetail = (id) => {
         recipeAPI.listOne(id).then(res => {
             $scope.recipe = res.data;
+            $scope.app = res.data.name;
+            $scope.costTotal = $scope.recipe.composities
+            .reduce((key, value) => key + (value.ingredient.cost * value.quantity), 0);
+            console.log($scope.costTotal);
         }).catch(err => {
             $scope.error = "Houve um problema: "+err;
         });

@@ -1,9 +1,9 @@
 angular.module('snackxpress').controller("ProductListCtrl",  function($scope, productAPI)  {
-    $scope.app = "Snackxpress";   
     $scope.products = []; 
     $scope.error =  '';
     
     var listProducts = () => {
+        $scope.app = "Produtos";   
         productAPI.listAll().then(res => {
             $scope.products = res.data;
         }).catch(err => {
