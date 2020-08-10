@@ -10,6 +10,12 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/ingredients', {
         templateUrl:'view/ingredients/ingredients.html'
     })
+    .when('/ingredient/new', {
+        templateUrl:'view/ingredients/formEditIngredient.html'
+    })
+    .when('/ingredient/:ingredient_id', {
+        templateUrl:'view/ingredients/formEditIngredient.html'
+    })
     .when('/products', {
         templateUrl:'view/products/products.html'
     })

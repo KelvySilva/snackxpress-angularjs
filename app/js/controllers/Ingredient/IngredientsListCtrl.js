@@ -1,4 +1,4 @@
-angular.module('snackxpress').controller("IngredientListCtrl",  function($scope, ingredientAPI)  {
+angular.module('snackxpress').controller("IngredientListCtrl",  function($scope, $location, ingredientAPI)  {
     $scope.ingredients = []; 
     $scope.error =  '';
     
@@ -14,7 +14,12 @@ angular.module('snackxpress').controller("IngredientListCtrl",  function($scope,
 
     $scope.ingredients = listIngredients();
     
+    $scope.handleEditIngredient = (id) => {
+        $location.path("/ingredient/"+id)
+    }
     
-    
+    $scope.handleAddIngredient = () => {
+        $location.path("/ingredient/new");
+    }
     
 });

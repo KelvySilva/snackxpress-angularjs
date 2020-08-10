@@ -1,6 +1,6 @@
 angular.module("snackxpress").provider("serialGenerator", () => {
 
-    var _lenght = 10;
+    const _lenght = 10;
 
     this.getLength = () => {
         return _lenght;
@@ -13,7 +13,7 @@ angular.module("snackxpress").provider("serialGenerator", () => {
     this.$get = () => {
         return {
             generate: () => {
-                var serial = "";
+                let serial = "";
                 while(serial.length < 10) {
                     serial += String.fromCharCode(Math.floor(Math.random() * 64 ) + 32 );
                 }
