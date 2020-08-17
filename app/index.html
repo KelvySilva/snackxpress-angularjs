@@ -3,8 +3,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snackxpress</title>
+     <!-- LIBS -->
+     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
+     <link rel="stylesheet" href="./css/app.css">
+     <link rel="stylesheet" href="./css/simple_sidebar.css">   
+     <link rel="stylesheet" href="./lib/angular-toaster/css/toaster.min.css">   
     <!-- CORE & MODULES -->    
     <script src="./lib/angular/angular.js"></script>
+    <script src="./lib/angular/angular-animate.js"></script>
+    <script src="./lib/angular-toaster/js/toaster.min.js"></script>
     <script src="./lib/angular/angular-route.js"></script>
     <script src="./lib/angular/angular.locale.pt_br.js"></script>
     <script src="./lib/branas-money-mask/angular-money-mask.js"></script>
@@ -17,12 +24,14 @@
     <script src="./js/filters/limiter.js"></script>
     <!-- DIRECTIVES -->
     <script src="./js/directives/errorMessage.js"></script>
+    <script src="./js/directives/successMessage.js"></script>
     <!-- CONTROLLERS -->
     <script src="./js/controllers/Home/homeCtrl.js"></script> 
     <script src="./js/controllers/Ingredient/IngredientsListCtrl.js"></script> 
     <script src="./js/controllers/Ingredient/EditIngredientCtrl.js"></script> 
     <script src="./js/controllers/Product/ProductListCtrl.js"></script>
     <script src="./js/controllers/Recipe/RecipeListCtrl.js"></script> 
+    <script src="./js/controllers/Recipe/EditRecipeCtrl.js"></script> 
     <script src="./js/controllers/Recipe/RecipeDetailsCtrl.js"></script> 
     <script src="./js/controllers/Menu/MenuListCtrl.js"></script> 
     <script src="./js/controllers/Menu/MenuDetailsCtrl.js"></script> 
@@ -33,10 +42,7 @@
     <script src="./js/services/recipeSvc.js"></script> 
     <script src="./js/services/menuSvc.js"></script> 
     <script src="./js/services/clientSvc.js"></script> 
-    <!-- LIBS -->
-    <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="./css/simple_sidebar.css">   
+   
    
 </head>
 <body>

@@ -1,1 +1,1 @@
-angular.module("snackxpress", ['ngRoute', "money-mask"]);
+angular.module("snackxpress", ['ngRoute', "money-mask","toaster"]);

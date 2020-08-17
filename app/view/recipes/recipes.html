@@ -1,9 +1,12 @@
 <main class="jumbotron" ng-controller="RecipeListCtrl">
     <div class="container "  >
         <div class="row pb-5">
-            <div class="col-lg-12 text-left">
-             <h1 class="h2" ng-bind="app">
-             </h1>
+            <div class="col-lg-6 text-left">
+                <h1 class="h2" ng-bind="app"></h1>
+            </div>
+            <div class="col-lg-6 text-right">
+                <button class="btn btn-success" ng-click="handleAddRecipe()">Novo <i class="fas fa-plus"></i></button>
+            </div>
      
             </div>
         </div>           

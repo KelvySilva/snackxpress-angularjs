@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="prod in menu.list">
+                        <tr ng-repeat="prod in menu.list | orderBy:'-category'">
                             <td> {{prod.id}} </td>
                             <td> {{prod.category}} </td>
                             <td class="d-flex flex-row">

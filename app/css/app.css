@@ -2,22 +2,63 @@ table tr td,table tr th {
     font-size: .85rem;
 }
 
+.off-in-5 {
+
+  transition: 5000 ease-in-out;
+
+}
+.added-item .qtd-focus i {
+    pointer-events: none;
+}
+.added-item .qtd-focus {
+  background: #eee;
+  margin-right: .25rem;
+  border: 1px solid #ccc;
+  border-radius: .25rem;
+}
+.added-item {
+  border: 1px solid #ccc;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    background: #fff;
+}
+
 .ui-alert {
-    background-color: #f2dede;
     padding: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
     border-radius: .5rem;
 }
-.ui-alert-title {
+.ui-alert.ui-error {
+    background-color: #f2dede;
+}
+.ui-alert.ui-success {
+    background-color: #d4edda;
+}
+.ui-alert-title {  
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+.ui-alert-title.ui-error {
     color: #af4341;
-    font-weight: bold;
-    font-size: 1.25rem;
+}
+.ui-alert-title.ui-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
 }
 
 .ui-alert-message {
-    color: #af4341;
     font-size: 1.25rem;
+}
+.ui-alert-message.ui-error {
+    color: #af4341;
+}
+
+.ui-alert-message.ui-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
 }
 
 /* Simple sidebar */

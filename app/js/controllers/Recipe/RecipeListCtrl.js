@@ -17,6 +17,9 @@ angular.module('snackxpress').controller("RecipeListCtrl",  function($scope, $lo
     }
 
     $scope.recipes = listRecipes();
-   
+    
+    $scope.handleAddRecipe = () => {
+        $location.path( "/recipe/new");
+    }
     
 });

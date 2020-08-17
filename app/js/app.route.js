@@ -4,9 +4,11 @@ angular.module('snackxpress').config(($routeProvider) => {
     //     requireBase: false
     // });
     $routeProvider
+    //Home
     .when('/', {
         templateUrl:'view/home/home.html'
     })
+    //Ingredients
     .when('/ingredients', {
         templateUrl:'view/ingredients/ingredients.html'
     })
@@ -16,15 +18,21 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/ingredient/:ingredient_id', {
         templateUrl:'view/ingredients/formEditIngredient.html'
     })
+    //Products
     .when('/products', {
         templateUrl:'view/products/products.html'
     })
+    //Recipes
     .when('/recipes', {
         templateUrl:'view/recipes/recipes.html'
+    })
+    .when('/recipe/new', {
+        templateUrl:'view/recipes/formEditRecipe.html'
     })
     .when('/recipe/:recipe_id', {
         templateUrl:'view/recipes/recipe.html'
     })
+    //Menus
     .when('/menus', {
         templateUrl:'view/menus/menus.html'
     })
