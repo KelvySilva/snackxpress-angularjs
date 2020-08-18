@@ -1,7 +1,9 @@
-angular.module('snackxpress').controller("EditRecipeCtrl",  function($scope, $route, $location, recipeAPI, ingredientAPI, toaster)  {
+angular.module('snackxpress').controller("EditRecipeCtrl",  
+function($scope, $route, $location, recipeAPI, ingredientAPI, toaster)  {
     $scope.ingredientsToSelect = []; 
     $scope.error =  '';
-    $scope.composities = [];
+
+    const id = $route.current.params.recipe_id;
 
     var ingredients = () => {
         ingredientAPI.listAll().then(res => {
@@ -10,6 +12,8 @@ angular.module('snackxpress').controller("EditRecipeCtrl",  function($scope, $ro
             $scope.error = res.data.detail;
         })
     }
+
+   
 
     $scope.ingredientsToSelect = ingredients();
 
@@ -26,26 +30,57 @@ angular.module('snackxpress').controller("EditRecipeCtrl",  function($scope, $ro
         delete composite;
     }
 
-    $scope.handleRemoveComposite = (composite) => {
-        $scope.composities = $scope.composities.map(comp => {
-            if(comp.ingredient.id != composite.ingredient.id) {
-                return comp;
-            }
-        });
+    $scope.handleRemoveComposite = (index) => {
+        $scope.composities.splice(index, 1);
+    
     }
 
-    // const id = $route.current.params.ingredient_id;
+    $scope.handleAddRecipe = () => {
+        $scope.recipe.composities       = $scope.composities;
+        $scope.productFinal.cost        = $scope.productFinal.cost.replace("R$","").replace(",",".");;
+        $scope.productFinal.price       = $scope.productFinal.price.replace("R$","").replace(",",".");;
+        $scope.productFinal.discount    = $scope.productFinal.discount.replace("R$","").replace(",",".");;
+        $scope.recipe.productFinal      = $scope.productFinal;
+        recipeAPI.saveOne($scope.recipe).then(res => {
+            toaster.pop('success', "Feito!", "Receita salva com sucesso!");
+            $location.path( "/recipes");
+        }).catch(err => {
+            toaster.pop('error', "Ops...", "Houve algo de errado!"+err.data.detail);
+        })
+    }
 
-    // var editIngredientCtrl = (id) => {
-    //     ingredientAPI.findOne(id).then(res => {
-    //         $scope.ingredient = res.data;
-    //         // $scope.ingredient.cost = Intl.NumberFormat("pt-br", {style:"currency", currency:"BRL"}).format($scope.ingredient.cost);
-    //         $scope.ingredient.cost = String($scope.ingredient.cost);
-    //         $scope.app = "Edição";   
-    //     }).catch(err => {
-    //         $scope.error = err.data.detail;
-    //     });
-    // }
+
+    
+
+    var editRecipe = (id) => {
+        $scope.composities = [];
+        $scope.recipe = {
+            id:0,
+            name:""
+        };
+        $scope.productFinal = {
+            id:0,
+            name:"",
+            price:0,
+            cost:0,
+            discount:0,
+            description:"",
+            type:"FINAL"
+        };
+        recipeAPI.listOne(id).then(res => {
+            $scope.recipe = res.data;
+            $scope.productFinal.id = $scope.recipe.productFinal.id;           
+            $scope.productFinal.name = $scope.recipe.productFinal.name;           
+            $scope.productFinal.description = $scope.recipe.productFinal.description;           
+            $scope.productFinal.price = $scope.recipe.productFinal.price.toFixed(2);           
+            $scope.productFinal.cost = $scope.recipe.productFinal.cost.toFixed(2);           
+            $scope.productFinal.discount = $scope.recipe.productFinal.discount.toFixed(2);           
+            $scope.composities = $scope.recipe.composities;
+            $scope.app = "Edição";   
+        }).catch(err => {
+            $scope.error = err.data.detail;
+        });
+    }
 
 
     // $scope.saveIngredient = (ingredientToSave) => {
@@ -68,25 +103,25 @@ angular.module('snackxpress').controller("EditRecipeCtrl",  function($scope, $ro
         
     // }
 
-    // var addIngredient = () => {
-    //     $scope.ingredient = {
-    //         id:0,
-    //         name:"",
-    //         description:"",
-    //         cost:0,
-    //         stock: {
-    //             id:0,
-    //             quantity:0
-    //         },
-    //         type: "COMPOSITE"
-    //     }
-    // }
-    // console.log(id);
-    // if(id != undefined) {
-    //     $scope.ingredient = editIngredientCtrl(id);
-    // }else {
-    //     $scope.ingredient = addIngredient();
-    // }
+    var addRecipe = () => {
+        $scope.composities = [];
+        $scope.recipe = {
+            name:""
+        };
+        $scope.productFinal = {
+            name:"",
+            price:0,
+            cost:0,
+            discount:0,
+            description:"",
+            type:"FINAL"
+        };
+    }
+    if(id != undefined) {
+        $scope.recipe = editRecipe(id);
+    }else {
+        $scope.recipe = addRecipe();
+    }
     
     
     

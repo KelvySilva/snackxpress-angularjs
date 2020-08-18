@@ -20,4 +20,8 @@ angular.module('snackxpress').controller("RecipeDetailsCtrl",  function($scope, 
 
     $scope.recipe = recipeDetail(id);
     
+    $scope.handleEditRecipe = (id) => {
+        $location.path("/recipe/edit/"+id);
+    }
+
 });

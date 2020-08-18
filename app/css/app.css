@@ -18,9 +18,10 @@ table tr td,table tr th {
 }
 .added-item {
   border: 1px solid #ccc;
-    padding: .5rem 1rem;
-    border-radius: .5rem;
-    background: #fff;
+  padding: .25rem 1rem;
+  border-radius: .5rem;
+  background: #fff;
+  margin-bottom: .25rem;
 }
 
 .ui-alert {

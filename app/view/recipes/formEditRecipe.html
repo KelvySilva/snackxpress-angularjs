@@ -17,32 +17,56 @@
                 </div>
                 <div class="col-lg-12">
                     <form class="form">
-                        <div class="form-row">
-                            <div class="form-group col-lg-6">                            
-                                <input type="text" placeholder="Nome:" ng-model="ingredient.name" class="form-control">
+                                          
+                        <div ng-if="formProdFinal"  class="form-row border  rounded p-2 mb-2">
+                                show2
+                        </div>
+                        <div class="form-row border  rounded p-2 mb-2">
+                            <div class="form-group col-lg-12 text-center">
+                                <h3>Dados da Recieta:</h3>
+                            </div>                            
+                            <div class="form-group col-lg-12">                            
+                                <input type="text" placeholder="Nome da Receita:" ng-model="recipe.name" class="form-control">
                                 <input type="hidden" ng-model="recipe.id" class="form-control">
+                                <input type="hidden" ng-model="productFinal.id" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-12">                            
+                                <input type="text" placeholder="Nome do produto final:" ng-model="productFinal.name" class="form-control">
+                            </div>
+                        
+                            <div class="form-group col-lg-12">
+                                <textarea type="text" placeholder="Descrição do produto:" ng-model="productFinal.description" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="productFinal.cost">Custo do Produto (opcional)</label>
+                                <input type="text"  money-mask  ng-model="productFinal.cost" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="productFinal.discount">Desconto do Produto (opcional)</label>
+                                <input type="text" placeholder="Desconto do produto:" money-mask  ng-model="productFinal.discount" class="form-control">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="productFinal.price">Preço do Produto</label>
+                                <input type="text" placeholder="Preço do produto:" money-mask  ng-model="productFinal.price" class="form-control">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-lg-6">
-                                <textarea type="text" placeholder="Descrição:" ng-model="recipe.description" class="form-control"></textarea>
+                        <div class="form-row border  p-2 rounded mb-2">
+                            <div class="form-group col-lg-12 text-center"> 
+                                <h3>Ingredientes:</h3>
                             </div>
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-lg-6 ">
-                                <div class="d-flex flex-row added-item justify-content-between" ng-repeat="composite in composities track by $index">
+                                <div class="d-flex flex-row added-item justify-content-between align-items-center" id="comp-{{composite.ingredient.id}}" 
+                                ng-repeat="composite in composities track by $index">
                                     <div class=""> {{composite.ingredient.name}} </div>
                                     <div class="d-flex flex-row">
                                         <div class="px-3 py-1 qtd-focus"> {{composite.quantity}} </div>
-                                        <button class="btn btn-danger p-1" ng-click="handleRemoveComposite(composite)"><i class="fas fa-trash-alt"></i></button>
+                                        <button class="btn btn-danger p-1" ng-click="handleRemoveComposite($index)"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row rounded py-2">
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-4">
                                 <select ng-model="composite.ingredient" ng-required="true" ng-options="ingredientToSelect.name for ingredientToSelect in ingredientsToSelect" class="form-control" id="">
-                                    <option value="">Selecione o ingredient</option>
+                                    <option value="">Selecione o ingrediente</option>
                                 </select>
                             </div>
                             <div class="form-group col-lg-1">
@@ -52,6 +76,11 @@
                                 <button class="btn btn-success py-2" ng-disabled="!(composite.quantity)" ng-click="handleAddComposite(composite)"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
+                       <div class="form-row py-3">
+                            <div class="form-group col-lg-12 text-right">
+                                <button class="btn btn-success" ng-click="handleAddRecipe()">Salvar</button>
+                            </div>
+                       </div>
                        
                     </form>
                 </div>

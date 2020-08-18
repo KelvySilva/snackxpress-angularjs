@@ -29,6 +29,9 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/recipe/new', {
         templateUrl:'view/recipes/formEditRecipe.html'
     })
+    .when('/recipe/edit/:recipe_id', {
+        templateUrl:'view/recipes/formEditRecipe.html'
+    })
     .when('/recipe/:recipe_id', {
         templateUrl:'view/recipes/recipe.html'
     })
