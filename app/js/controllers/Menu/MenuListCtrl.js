@@ -17,4 +17,7 @@ angular.module('snackxpress').controller("MenuListCtrl",  function($scope,$locat
         $location.path(`/menu/${id}`)
     }
     
+    $scope.handleAddMenu = () => {
+        $location.path("/menu/new");
+    }
 });

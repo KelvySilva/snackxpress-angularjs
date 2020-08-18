@@ -15,5 +15,10 @@ angular.module('snackxpress').controller("MenuDetailsCtrl",  function($scope,$lo
 
     $scope.menu = menuDetails(id);
    
+    $scope.handleEditMenu = (id) => {
+        console.log(id);
+        $location.path("/menu/edit/"+id);
+    }
+
     
 });

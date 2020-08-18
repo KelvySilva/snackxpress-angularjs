@@ -35,13 +35,20 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/recipe/:recipe_id', {
         templateUrl:'view/recipes/recipe.html'
     })
-    //Menus
+    // Menus
     .when('/menus', {
         templateUrl:'view/menus/menus.html'
+    })
+    .when('/menu/new', {
+        templateUrl:'view/menus/formEditMenu.html'
+    })
+    .when('/menu/edit/:menu_id', {
+        templateUrl:'view/menus/formEditMenu.html'
     })
     .when('/menu/:menu_id', {
         templateUrl:'view/menus/menuDetails.html'
     })
+    // Clients
     .when('/clients', {
         templateUrl:'view/clients/clients.html'
     })
