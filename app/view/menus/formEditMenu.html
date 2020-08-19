@@ -15,48 +15,116 @@
                 </div>
             </div>
             <div class="row">
-                <form class="form w-100">
-                    <div class="form-row">
-                        <div class="form-group col-lg-6">
-                            <label for="menu.name">Nome:</label>
-                            <input type="hidden" ng-model="menu.id" class="form-control">
-                            <input type="text" ng-model="menu.name" class="form-control">
+                <!-- {{menu}} -->
+                <div class="col-lg-12 d-none">
+                    <div class="w-100">Nome: {{menu.name}} </div>
+                    <div class="w-100" ng-repeat="itemDoMenu in menu.listItem track by $index">
+                        <div class="w-100">cat: {{itemDoMenu.category}}</div>
+                        <div class="w-100">tt: {{itemDoMenu.total}}</div>
+                        <div class="w-100">stt: {{itemDoMenu.subtotal}}</div>
+                        <div class="w-100">disc: {{itemDoMenu.discountAmount}}</div>
+                        <div class="w-100" ng-repeat="productDaLista in itemDoMenu.productList track by $index">
+                            <div class="w-100">name: {{productDaLista.name}} </div>
+                            <div class="w-100">price: {{productDaLista.price}} </div>
+                            <div class="w-100">disc: {{productDaLista.discount}} </div>
+                            <div class="w-100">type: {{productDaLista.type}} </div>
+                            <div class="w-100">cost: {{productDaLista.cost}} </div>
+                            <div class="w-100">desc: {{productDaLista.description}} </div>
                         </div>
                     </div>
-                    <div class="form-row " >
-                        <div class="form-group  col-lg-6  border p-2 rounded">
-                            {{listItem}}
-                            <div class="form-row border p-2 rounded" ng-repeat="item in listItem">
-                                    <div ng-repeat="prod in item.productList">
-                                        {{prod.name}}
+                </div>
+            </div>
+            <div class="row">
+                <form class="form w-100" name="formItem">
+                        <div class="form-row">
+                            <div class="form-group col-lg-6">
+                                <label for="menu.name">Nome:</label>
+                                <input type="hidden" ng-model="menu.id" class="form-control">
+                                <input type="text" ng-model="menu.name" class="form-control">
+                                <label class="pt-3" ng-show="listItem.length > 0" for="">Itens:</label>
+                                <div class="d-flex flex-column">                                    
+                                    <div class="added-item d-flex flex-row justify-content-between align-items-center" ng-repeat="itemList in listItem track by $index">
+                                        <div class="d-flex flex-column">
+                                            <div class="w-100">Tipo : {{itemList.category}}</div>
+                                            <div class="w-100" ng-repeat="productItemList in itemList.productList track by $index">
+                                                Produto : {{productItemList.name}}
+                                            </div>
+                                            <div class="w-100">Preço : {{itemList.price | currency }}</div>
+                                            <div class="w-100">Desconto : {{itemList.discountAmount | currency }}</div>
+                                        </div>
+                                        <div class="">
+                                            <button class="btn btn-danger p-1" ng-click="handleRemoveItem($index)"><i class="fas fa-trash-alt"></i></button>
+                                        </div>  
                                     </div>
+                                </div>
+                                <div class="form-group pt-3" ng-show="listItem.length > 0">
+                                    <button class="btn btn-success" ng-disabled="!menu.name">Salvar cardápio</button>
+                                </div>
                             </div>
-                            <div class="form-row border p-2 rounded" >
-                                <div class="form-group   col-lg-10">
-                                    <input type="text" ng-model="listItem.category" class="form-control">
-                                </div>
-                                <div class="form-group col-lg-12 d-flex flex-row added-item justify-content-between align-items-center" 
-                                ng-repeat="product in productList track by product.id">
-                                    <div class=""> {{product.name}} </div>
-                                    <div class="">
-                                        <button class="btn btn-danger p-1" ng-click="handleRemoveComposite($index)"><i class="fas fa-trash-alt"></i></button>
-                                    </div>                                    
-                                </div>                               
-                                <div class="form-group mb-0  col-lg-10">
-                                    <select ng-model="listItem[product]" ng-required="true" ng-options="product.name for product in productsToSelect" class="form-control">
-                                        <option value="">Selecione o produto</option>
-                                    </select>
-                                </div>
+                       
+                            <div class="form-group  col-lg-6  border p-2 rounded d-flex flex-column">
+                                
                                
-                                <div class="form-group mb-0  col-lg-2">
-                                    <button class="btn btn-success py-2" ng-click="handleAddProdToList(listItem[product])"><i class="fas fa-plus"></i></button>
+                                
+                                <div class="d-flex flex-column">
+                                    
+                                    <label for="productToSelect">Produtos: </label>
+                                   
+                                    <div class="form-row border p-2 rounded" >
+                                        
+                                        <div class="form-group   col-lg-12">
+                                            <label for="item.category">Tipo:</label>
+                                            <select ng-required="true" ng-model="item.category" class="form-control" id="">
+                                                <option value="">Selecione um tipo</option>
+                                                <option value="SNACK">LANCHE</option>
+                                                <option value="DRINK">BEBIDA</option>
+                                                <option value="COMBO">COMBO</option>
+                                            </select>
+                                        </div>                                       
+                                                                             
+                                        <div class="form-group   col-lg-12">
+                                            <label for="item.price">Preço do Item:</label>                                                
+                                            <input type="numer" money-mask ng-required="true" ng-model="item.price" class="form-control">                                            
+                                            
+                                        </div>
+                                        <div class="form-group   col-lg-12">                                            
+                                            <label for="item.discountAmount">Desconto do Item: </label>
+                                            <input type="text" money-mask ng-model="item.discountAmount" class="form-control">
+                                        </div>
+                                                 
+                                        <div class="form-group col-lg-12  d-flex flex-column ">
+                                            <label for="" ng-show="item.productList.length"><small>Produtos no item:</small> </label>
+                                            <div class="added-item d-flex flex-row justify-content-between align-items-center w-100" ng-repeat="product in item.productList track by $index">
+                                                <div class=""> {{product.name}} </div>
+                                                <div class="">
+                                                    <button class="btn btn-danger p-1" ng-click="handleRemoveProdToList($index)"><i class="fas fa-trash-alt"></i></button>
+                                                </div>  
+                                            </div>                                  
+                                        </div> 
+                                        
+                                    
+                                        
+                                    </div>
+                                    <div class="form-row border mb-2 p-2 rounded" >
+                                        <div class="form-group  col-lg-10">
+                                            <select ng-model="productToSelect" ng-required="true" ng-options="productToSelect.name for productToSelect in productsToSelect" class="form-control">
+                                                <option value="">Selecione o produto</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-0  col-lg-2">                                            
+                                            <button class="btn btn-success py-2" 
+                                                ng-disabled="!productToSelect" 
+                                                ng-click="handleAddProdToList(productToSelect)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="form-row mb-0 py-2 ">
+                                        <!-- <div class="form-group col-lg-2"> -->
+                                            <button class="btn btn-success py-2" ng-disabled="item.productList.length == 0 || item.price.$untouched" ng-click="handleAddProdListToMenuItem(item)">Adicionar ao menu</button>
+                                        <!-- </div> -->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-row mb-0 py-2 col-lg-2">
-                                <button class="btn btn-success py-2" ng-click="handleAddProdListToMenuItem(productList)"><i class="fas fa-plus"></i></button>
                             </div>
                         </div>
-                    </div>
                 </form>
             </div>
        </div>
