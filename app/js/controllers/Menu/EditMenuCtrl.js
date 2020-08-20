@@ -1,4 +1,5 @@
-angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$location,$route,$filter, menuAPI, productAPI)  {
+angular.module('snackxpress').controller("EditMenuCtrl",  
+function($scope,$location,$route, menuAPI, $timeout, toaster, productAPI)  {
     
     $scope.error =  '';
     const id = $route.current.params.menu_id;
@@ -16,8 +17,29 @@ angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$locat
         $scope.app = "Cardápios";   
         menuAPI.listOne(id).then(res => {
             $scope.menu = res.data;
-            $scope.list = $scope.menu.list;
+            $scope.menuItems = $scope.menu.menuItems;
             $scope.app = "Edição:";
+            $scope.item = {
+                category: "",
+                total: 0,
+                subtotal: 0,
+                discountAmount: 0,
+                productList: []
+            }
+    
+            $scope.product = {
+                cost: 0,
+                description: "",
+                discount: 0,
+                id: 0,
+                name: "",
+                price: 0,
+                stock: {
+                    id: 0, 
+                    quantity: 0
+                },
+                type: "FINAL",
+            };
         }).catch(err => {
             $scope.error = err.data.detail;
         });
@@ -27,7 +49,8 @@ angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$locat
 
         $scope.item = {
             category: "",
-            price: 0,
+            total: 0,
+            subtotal: 0,
             discountAmount: 0,
             productList: []
         }
@@ -35,7 +58,7 @@ angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$locat
         $scope.menu = {
             id:0,
             name:"",
-            listItem : [
+            menuItems : [
                 {
                     category:"",
                     total:0,
@@ -58,11 +81,9 @@ angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$locat
                     ]
                 }
             ]
-        }; 
+        };    
 
-        
-
-        $scope.listItem = [];
+        $scope.menuItems = [];
 
         $scope.product = {
             cost: 0,
@@ -94,22 +115,50 @@ angular.module('snackxpress').controller("EditMenuCtrl",  function($scope,$locat
     }
     
     $scope.handleRemoveItem = (index) => {
-        $scope.listItem.splice(index, 1);
+        $scope.menuItems.splice(index, 1);
     
     }
     
     $scope.handleAddProdListToMenuItem = (item) => {      
         console.log(item);  
 
-        item.price = item.price.replace("R$","").replace(",",".");
+        
+        item.total = 0;
+        item.subtotal = 0;
         item.discountAmount = item.discountAmount.replace("R$","").replace(",",".");
 
-        $scope.listItem.push(angular.copy(item));
-        item.price = "0,00";
+        $scope.menuItems.push(angular.copy(item));
+        
         item.discountAmount = "0,00";
         item.category = "";
         item.productList = [];
         delete item;       
+    }
+
+    $scope.handleSaveMenu = () => {
+        $scope.menuItems = $scope.menuItems.map(menuItem => {
+            menuItem.total = 0;
+            menuItem.subtotal = 0;
+            return menuItem;
+        })
+        $scope.menu.menuItems = $scope.menuItems;
+        menuAPI.saveOne($scope.menu).then(res => {
+            toaster.pop('success', "Feito!", "Cardápio salvo com sucesso!");
+
+            $timeout(() => {
+                $location.path("/menus")
+            }, 2000)
+
+        }).catch(err => {
+            $scope.error = err.data.detail;
+        })
+        
+    }
+
+    $scope.handleEditMenuItem = (item_id) => {
+        let path = "/menu/edit/"+$scope.menu.id+"/item/"+item_id;
+        console.log(path);
+        $location.path(path);
     }
     
     if(id != undefined) {

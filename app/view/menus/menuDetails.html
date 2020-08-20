@@ -24,11 +24,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="prod in menu.list | orderBy:'-category'">
+                        <tr ng-repeat="prod in menu.menuItems | orderBy:'-category'">
                             <td> {{prod.id}} </td>
                             <td> {{prod.category}} </td>
                             <td class="d-flex flex-row">
-                                <div ng-repeat="(k, v) in prod.list">
+                                <div ng-repeat="(k, v) in prod.productList">
                                     <span ng-show="k != 0">&nbsp;+&nbsp;</span>{{v.name}}
                                 </div>
                             </td>

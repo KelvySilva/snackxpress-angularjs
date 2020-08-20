@@ -1,0 +1,52 @@
+<main class="jumbotron" ng-controller="EditMenuItemCtrl">
+    <div class="container "  >
+        <div class="row pb-5">
+            <div class="col-lg-12 d-flex justify-content-between">
+                <h1 class="h2" ng-bind="app"></h1>
+            </div>
+        </div>           
+    </div>
+        
+        <div class="container ">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                <error-message ng-show="error"></error-message>
+                <toaster-container></toaster-container>     
+                
+                </div>
+            </div>
+            <div class="row">
+                <!-- {{menuItem}} -->
+            </div>
+            <div class="row">
+                <form class="form w-100" name="formItem">
+                        <input type="hidden" ng-model="menuItem.id" ng-value="menuItem.id">
+                        Tipo:<div class="form-group col-lg-6 added-item text-muted">
+                           <select ng-model="menuItem.category"  class="form-control" ng-value="menuItem.category" id="">
+                               <option value="">Selecione um tipo</option>
+                               <option value="SNACK">LANCHE</option>
+                               <option value="DRINK">BEBIDA</option>
+                               <option value="COMBO">COMBO</option>
+                           </select>
+                        </div>
+                        Prdutos: <div class="form-group col-lg-6 added-item text-muted" ng-repeat="product in menuItem.productList track by $index">                            
+                           {{product.name}} - <span class="font-weight-bold">Preço Unitário: {{product.price | currency}} </span>
+                        </div>
+                        
+                        <div class="form-group col-lg-6 px-0">
+                            <label for="menuItem.discountAmount">Desconto Atual:</label>
+                           <input type="text" ng-model="menuItem.discountAmount" money-mask ng-value="menuItem.discountAmount | currency" class="form-control">
+                        </div>
+                        Valor total do Item: 
+                        <div class="form-group col-lg-6 added-item text-muted" >                            
+                            <!-- {{(menuItem.subtotal - menuItem.discountAmount | currency)}} -->
+                            {{(menuItem.subtotal - (menuItem.discountAmount | moneyToNumber)) | currency}}
+                        </div>
+                        <div class="form-group col-lg-6 px-0">
+                           <button class="btn btn-success" ng-click="handleSaveMenuItem()">Salvar</button>
+                        </div>
+                </form>
+            </div>
+       </div>
+    <!-- </div> -->
+  </main>

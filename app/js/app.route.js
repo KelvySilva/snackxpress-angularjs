@@ -22,6 +22,9 @@ angular.module('snackxpress').config(($routeProvider) => {
     .when('/products', {
         templateUrl:'view/products/products.html'
     })
+    .when('/product/edit/:product_id', {
+        templateUrl:'view/products/formEditProduct.html'
+    })
     //Recipes
     .when('/recipes', {
         templateUrl:'view/recipes/recipes.html'
@@ -44,6 +47,9 @@ angular.module('snackxpress').config(($routeProvider) => {
     })
     .when('/menu/edit/:menu_id', {
         templateUrl:'view/menus/formEditMenu.html'
+    })
+    .when('/menu/edit/:menu_id/item/:menu_item_id', {
+        templateUrl:'view/menus/formEditMenuItem.html'
     })
     .when('/menu/:menu_id', {
         templateUrl:'view/menus/menuDetails.html'

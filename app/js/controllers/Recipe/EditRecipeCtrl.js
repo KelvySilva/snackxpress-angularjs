@@ -37,9 +37,10 @@ function($scope, $route, $location, recipeAPI, ingredientAPI, toaster)  {
 
     $scope.handleAddRecipe = () => {
         $scope.recipe.composities       = $scope.composities;
-        $scope.productFinal.cost        = $scope.productFinal.cost.replace("R$","").replace(",",".");;
-        $scope.productFinal.price       = $scope.productFinal.price.replace("R$","").replace(",",".");;
-        $scope.productFinal.discount    = $scope.productFinal.discount.replace("R$","").replace(",",".");;
+        $scope.productFinal.origin      = "MANUFACTURED"
+        $scope.productFinal.cost        = $scope.productFinal.cost.replace("R$","").replace(",",".");
+        $scope.productFinal.price       = $scope.productFinal.price.replace("R$","").replace(",",".");
+        $scope.productFinal.discount    = $scope.productFinal.discount.replace("R$","").replace(",",".");
         $scope.recipe.productFinal      = $scope.productFinal;
         recipeAPI.saveOne($scope.recipe).then(res => {
             toaster.pop('success', "Feito!", "Receita salva com sucesso!");

@@ -11,28 +11,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                 <error-message ng-show="error"></error-message>
+                <toaster-container></toaster-container>     
                 
                 </div>
             </div>
             <div class="row">
                 <!-- {{menu}} -->
-                <div class="col-lg-12 d-none">
-                    <div class="w-100">Nome: {{menu.name}} </div>
-                    <div class="w-100" ng-repeat="itemDoMenu in menu.listItem track by $index">
-                        <div class="w-100">cat: {{itemDoMenu.category}}</div>
-                        <div class="w-100">tt: {{itemDoMenu.total}}</div>
-                        <div class="w-100">stt: {{itemDoMenu.subtotal}}</div>
-                        <div class="w-100">disc: {{itemDoMenu.discountAmount}}</div>
-                        <div class="w-100" ng-repeat="productDaLista in itemDoMenu.productList track by $index">
-                            <div class="w-100">name: {{productDaLista.name}} </div>
-                            <div class="w-100">price: {{productDaLista.price}} </div>
-                            <div class="w-100">disc: {{productDaLista.discount}} </div>
-                            <div class="w-100">type: {{productDaLista.type}} </div>
-                            <div class="w-100">cost: {{productDaLista.cost}} </div>
-                            <div class="w-100">desc: {{productDaLista.description}} </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div class="row">
                 <form class="form w-100" name="formItem">
@@ -41,24 +26,28 @@
                                 <label for="menu.name">Nome:</label>
                                 <input type="hidden" ng-model="menu.id" class="form-control">
                                 <input type="text" ng-model="menu.name" class="form-control">
-                                <label class="pt-3" ng-show="listItem.length > 0" for="">Itens:</label>
+                                <label class="pt-3" ng-show="menuItems.length > 0" for="">Itens:</label>
                                 <div class="d-flex flex-column">                                    
-                                    <div class="added-item d-flex flex-row justify-content-between align-items-center" ng-repeat="itemList in listItem track by $index">
+                                    <div class="added-item d-flex flex-row justify-content-between align-items-center" ng-repeat="itemList in menuItems track by $index ">
                                         <div class="d-flex flex-column">
+                                            <small ng-show="itemList.id > 0">ID: {{itemList.id}} </small>
                                             <div class="w-100">Tipo : {{itemList.category}}</div>
-                                            <div class="w-100" ng-repeat="productItemList in itemList.productList track by $index">
-                                                Produto : {{productItemList.name}}
+                                            <div class="w-100 d-flex flex-column border p-2 rounded border-dark mb-1" ng-repeat="productItemList in itemList.productList track by $index">
+                                                <div>Produto : {{productItemList.name}}</div>
+                                                <div>Preço Unitário : {{productItemList.price | currency}}</div>
                                             </div>
-                                            <div class="w-100">Preço : {{itemList.price | currency }}</div>
+                                            <div class="w-100" ng-show="itemList.subtotal > 0" >Preço do(s) produto: {{itemList.subtotal | currency }}</div>
                                             <div class="w-100">Desconto : {{itemList.discountAmount | currency }}</div>
+                                            <div class="w-100 font-weight-bold" ng-show="itemList.total > 0">Preço do item no cardápio : {{itemList.total | currency }}</div>
                                         </div>
-                                        <div class="">
-                                            <button class="btn btn-danger p-1" ng-click="handleRemoveItem($index)"><i class="fas fa-trash-alt"></i></button>
+                                        <div class="d-flex flex-column">
+                                            <button type="button" class="btn btn-danger p-1 mb-2" ng-click="handleRemoveItem($index)"><i class="fas fa-trash-alt"></i></button>
+                                            <button type="button" ng-show="itemList.id" class="btn btn-primary p-1" ng-click="handleEditMenuItem(itemList.id)"><i class="fas fa-pen"></i></button>
                                         </div>  
                                     </div>
                                 </div>
-                                <div class="form-group pt-3" ng-show="listItem.length > 0">
-                                    <button class="btn btn-success" ng-disabled="!menu.name">Salvar cardápio</button>
+                                <div class="form-group pt-3" ng-show="menuItems.length > 0">
+                                    <button type="button" class="btn btn-success" ng-click="handleSaveMenu()" ng-disabled="!menu.name">Salvar cardápio</button>
                                 </div>
                             </div>
                        
@@ -82,11 +71,11 @@
                                             </select>
                                         </div>                                       
                                                                              
-                                        <div class="form-group   col-lg-12">
-                                            <label for="item.price">Preço do Item:</label>                                                
-                                            <input type="numer" money-mask ng-required="true" ng-model="item.price" class="form-control">                                            
+                                        <!-- <div class="form-group   col-lg-12">
+                                            <label for="item.subtotal">Preço do Item:</label>                                                
+                                            <input type="numer" money-mask ng-required="true" ng-model="item.subtotal" class="form-control">                                            
                                             
-                                        </div>
+                                        </div> -->
                                         <div class="form-group   col-lg-12">                                            
                                             <label for="item.discountAmount">Desconto do Item: </label>
                                             <input type="text" money-mask ng-model="item.discountAmount" class="form-control">
@@ -113,13 +102,17 @@
                                         </div>
                                         <div class="form-group mb-0  col-lg-2">                                            
                                             <button class="btn btn-success py-2" 
+                                                type="button"
                                                 ng-disabled="!productToSelect" 
                                                 ng-click="handleAddProdToList(productToSelect)"><i class="fas fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <div class="form-row mb-0 py-2 ">
                                         <!-- <div class="form-group col-lg-2"> -->
-                                            <button class="btn btn-success py-2" ng-disabled="item.productList.length == 0 || item.price.$untouched" ng-click="handleAddProdListToMenuItem(item)">Adicionar ao menu</button>
+                                            <button class="btn btn-success py-2" 
+                                            type="button"
+                                            ng-disabled="item.productList.length == 0 || !item.category" 
+                                            ng-click="handleAddProdListToMenuItem(item)">Adicionar ao cardápio</button>
                                         <!-- </div> -->
                                     </div>
                                 </div>
